@@ -4,18 +4,48 @@ import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
-import { formSchema } from './formSchema';
-import { uiSchema } from './uiSchema';
+import { uiSchema } from './UiSchema';
+import { validatePourcentages } from './ValidatePourcentage';
+import { FormSchema } from './FormSchema';
 
-const validatePourcentages = (formData: any) => {
-  let totalPourcentage = 0;
-  formData.pourcentages.forEach((item: any) => {
-    totalPourcentage += item.pourcentage;
-  });
-  if (totalPourcentage !== 100) {
-    return {
-      errors: [{ message: "Pour être valide l'ensemble doit faire 100%" }],
-    };
-  }
-  return { errors: [] };
+interface ValidationError {
+  message: string;
+}
+
+const CountryForm: React.FC = () => {
+  const [formData, setFormData] = useState({ nom: '', pourcentages: [] });
+  const [errors, setErrors] = useState<ValidationError[]>([]);
+
+  const handleSubmit = () => {
+    const validation = validatePourcentages(formData);
+    if (validation.errors.length > 0) {
+      setErrors(validation.errors);
+    } else {
+      console.log('Données valides : ', formData);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Formulaire des pays et pourcentages</h1>
+      <JsonForms
+        schema={FormSchema}
+        uischema={uiSchema}
+        data={formData}
+        renderers={materialRenderers}
+        cells={materialCells}
+        onChange={({ data }) => setFormData(data)}
+      />
+      {errors.length > 0 && (
+        <div style={{ color: 'red' }}>
+          {errors.map((error, index) => (
+            <p key={index}>{error.message}</p>
+          ))}
+        </div>
+      )}
+      <button onClick={handleSubmit}>Soumettre</button>
+    </div>
+  );
 };
+
+export default CountryForm;

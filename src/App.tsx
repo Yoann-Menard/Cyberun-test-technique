@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CountryForm from './Components/CountryForm';
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       >
         Learn React
       </a>
+      <CountryForm />
     </div>
   );
 }

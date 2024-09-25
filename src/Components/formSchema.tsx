@@ -1,4 +1,4 @@
-export const formSchema = {
+export const FormSchema = {
   type: 'object',
   properties: {
     nom: {
@@ -27,20 +27,3 @@ export const formSchema = {
     },
   },
 };
-
-/* En se basant sur une application React
-en utilisant la librairie jsonforms.io (en typescript), créer un formulaire ayant 2 champs : 
-un champ Nom
-un tableau avec dans la colonne de gauche un pays, dans la colonne de droite un pourcentage
-le champ nom est un champ texte tout ce qu'il y a de plus classique
-le tableau ressemble à cela :
-Pays
-[Liste de tous les pays (+inconnu) |v]       [___]%  [+] [Trash]
-
-une fois rempli, cela doit ressembler à :
-France        50%
-Belgique      20%
-Allemagne     10%
-Inconnu       20%
-Pour être valide l'ensemble doit faire 100%
-*/
