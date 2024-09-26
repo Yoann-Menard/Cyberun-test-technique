@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import { uiSchema } from './Components/UiSchema';
 
 test('renders learn react link', () => {
   render(<App />);
